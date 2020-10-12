@@ -40,7 +40,19 @@ def traversal_middle(bst):
 
 
 def traversal_last(bst):
-    pass
+    stack = []
+    ptr = bst.root
+    while ptr != None:
+        stack.append((ptr,2))
+        ptr = ptr.left
+        while ptr == None and len(stack) > 0:
+            temp = stack.pop(-1)
+            #ptr = temp[0].right#!!!
+            if temp[1]-1==0:
+                print(temp[0].val)
+            else:
+                stack.append((temp[0],1))
+                ptr = temp[0].right
 
 if __name__ == '__main__':
     bst=BST(4)
@@ -51,6 +63,9 @@ if __name__ == '__main__':
     bst.insert(5)
     bst.insert(6)
     bst.insert(7)
+    print("-----先序-----")
     traversal_first(bst)
+    print("-----中序-----")
     traversal_middle(bst)
-    #traversal_last(bst)
+    print("-----后序-----")
+    traversal_last(bst)
